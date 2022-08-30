@@ -1,0 +1,8 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "博客",
+  "main": "index.js",
+  "author": "彩虹",
+  "license": "MIT"
+}
