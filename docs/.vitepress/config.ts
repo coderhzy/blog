@@ -60,6 +60,7 @@ function nav() {
       {
         text: 'Config',
         items: [
+          { text: 'VueJs设计与实现', link: '/config/VueDesign01' },
           { text: 'Introduction', link: '/config/start' },
           { text: 'App Configs', link: '/config/ts' },
           { text: 'Theme Configs', link: '/config/vue' },
