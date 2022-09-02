@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /red/2022/life/01-穷爸爸富爸爸
+      link: /src/read/2022/life/01-穷爸爸富爸爸
     - theme: alt
       text: View on GitHub
       link: https://github.com/codehzy/blog
