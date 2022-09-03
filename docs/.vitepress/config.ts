@@ -13,6 +13,7 @@ export default {
       '/src/note/': sidebarNote(),
       '/src/read/': sidebarRead(),
       '/src/algorithm/': sidebarAlgorithm(),
+      '/src/essay/': sidebarEssay()
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/codehzy' }
@@ -27,9 +28,10 @@ export default {
 
 function nav() {
     return [
-      { text: '笔记', link: '/src/note/issue/01-ts-issue', activeMatch: '/note/issue' },
-      { text: '阅读心得', link: '/src/read/2022/life/01-穷爸爸富爸爸', activeMatch: '/read/read/2022/life' },
-      { text: '算法', link: '/src/algorithm/algorithmQA/01-quickSort', activeMatch: '/read/algorithm/algorithmQA' },
+      { text: '笔记', link: '/src/note/issue/01-ts-issue', activeMatch: '/note/' },
+      { text: '阅读心得', link: '/src/read/2022/life/01-穷爸爸富爸爸', activeMatch: '/read/' },
+      { text: '算法', link: '/src/algorithm/algorithmQA/01-quickSort', activeMatch: '/algorithm/' },
+      { text: '随笔', link: '/src/essay/2022/technology/01-前端程序员自我修养', activeMatch: '/essay/' },
       {
         text: version,
         items: [
@@ -105,6 +107,29 @@ function nav() {
           { text: '遍历数组方法', link: '/src/algorithm/handleWriting/01-遍历数组方法' },
         ]
       },
+    ]
+  }
+
+  function sidebarEssay() {
+    return [
+      {
+        text: '每天进步一点点',
+        items: [
+          { text: '箭头函数和普通函数区别', link: '/src/essay/2022/everyDay/01-箭头函数和普通函数有什么区别' },
+        ]
+      },
+      {
+        text: '技术',
+        items: [
+          { text: '前端程序员自我修养', link: '/src/essay/2022/technology/01-前端程序员自我修养' },
+        ]
+      },
+      {
+        text: '生活',
+        items: [
+          { text: '随风而去', link: '/src/essay/2022/life/01-随风而去' },
+        ]
+      }
     ]
   }
   
