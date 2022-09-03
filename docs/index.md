@@ -17,12 +17,12 @@ hero:
       link: https://github.com/codehzy/blog
 
 features:
-  - title: "Vite: The DX that can't be beat"
-    details: Feel the speed of Vite. Instant server start and lightning fast HMR that stays fast regardless of the app size.
-  - title: Designed to be simplicity first
-    details: With Markdown-centered content, it's built to help you focus on writing and deployed with minimum configuration.
-  - title: Power of Vue meets Markdown
-    details: Enhance your content with all the features of Vue in Markdown, while being able to customize your site with Vue.
-  - title: Fully static yet still dynamic
-    details: Go wild with true SSG + SPA architecture. Static on page load, but engage users with 100% interactivity from there.
+  - title: "平凡的世界"
+    details: 最平凡的人，也得要为他那个世界的存在而战斗。
+  - title: '平凡的世界'
+    details: 无论是谁，我们都曾经或正在经历各自的人生至暗时刻，那是一条漫长、黝黑、阴冷、令人绝望的隧道。
+  - title: '平凡的世界'
+    details: 一个人的命运不是自己想改变就能改变了的，至于理想，只不过是职业好坏的代名词罢了
+  - title: '平凡的世界'
+    details: 只有永不遏制的奋斗，才能使青春之花即便是凋谢，也是壮丽的凋谢！
 ---
