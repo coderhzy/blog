@@ -116,6 +116,7 @@ function nav() {
         text: '每天进步一点点',
         items: [
           { text: '箭头函数和普通函数区别', link: '/src/essay/2022/everyDay/01-箭头函数和普通函数有什么区别' },
+          { text: '说一下css盒模型', link: '/src/essay/2022/everyDay/02-说一下css盒模型' },
         ]
       },
       {
