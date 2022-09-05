@@ -118,6 +118,7 @@ function nav() {
           { text: '箭头函数和普通函数区别', link: '/src/essay/2022/everyDay/01-箭头函数和普通函数有什么区别' },
           { text: '说一下css盒模型', link: '/src/essay/2022/everyDay/02-说一下css盒模型' },
           { text: '如何判断一个数组是数组', link: '/src/essay/2022/everyDay/03-如何判断一个数组是数组' },
+          { text: '颜色拾取器windows失焦Bug', link: '/src/essay/2022/everyDay/04-颜色拾取器windows失焦Bug' },
         ]
       },
       {
