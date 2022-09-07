@@ -79,17 +79,27 @@ function nav() {
   function sidebarRead() {
     return [
       {
-        text: '技术',
+        text: '阅读',
+        collapsible: true,
         items: [
           { text: '穷爸爸富爸爸', link: '/src/read/2022/life/01-穷爸爸富爸爸' },
         ]
       },
       {
-        text: '生活',
+        text: "JavaScript高级程序设计",
+        collapsible: true,
         items: [
-          { text: 'VueJs设计与实现', link: '/src/read/2022/technology/01-VueDesign' },
+          { text: '01-什么是JavaScript', link: '/src/read/2022/technology/JavaScriptHighDesign/01-JavaScriptHighDesign' },
+          { text: '02-HTML中的JavaScript', link: '/src/read/2022/technology/JavaScriptHighDesign/02-JavaScriptHighDesign' },
         ]
-      }
+      },
+      {
+        text: 'VueJs设计与实现',
+        collapsible: true,
+        items: [
+          { text: '01-权衡艺术', link: '/src/read/2022/technology/VueDesign/01-VueDesign' },
+        ]
+      },
     ]
   }
 
@@ -97,12 +107,14 @@ function nav() {
     return [
       {
         text: '算法',
+        collapsible: true,
         items: [
           { text: '快速排序', link: '/src/algorithm/algorithmQA/01-quickSort' },
         ]
       },
       {
         text: '手写API',
+        collapsible: true,
         items: [
           { text: '遍历数组方法', link: '/src/algorithm/handleWriting/01-遍历数组方法' },
         ]
@@ -114,6 +126,7 @@ function nav() {
     return [
       {
         text: '每天进步一点点',
+        collapsible: true,
         items: [
           { text: '箭头函数和普通函数区别', link: '/src/essay/2022/everyDay/01-箭头函数和普通函数有什么区别' },
           { text: '说一下css盒模型', link: '/src/essay/2022/everyDay/02-说一下css盒模型' },
@@ -123,12 +136,14 @@ function nav() {
       },
       {
         text: '技术',
+        collapsible: true,
         items: [
           { text: '前端程序员自我修养', link: '/src/essay/2022/technology/01-前端程序员自我修养' },
         ]
       },
       {
         text: '生活',
+        collapsible: true,
         items: [
           { text: '随风而去', link: '/src/essay/2022/life/01-随风而去' },
         ]
