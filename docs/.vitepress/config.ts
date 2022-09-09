@@ -15,9 +15,18 @@ export default {
       '/src/algorithm/': sidebarAlgorithm(),
       '/src/essay/': sidebarEssay()
     },
+    editLink: {
+      pattern: 'https://github.com/codehzy/blog/edit/master/docs/:path',
+      text: 'Edit this page on GitHub'
+    },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/codehzy' }
     ],
+    // algolia: {
+    //   appId: 'NUDAMQECCC',
+    //   apiKey: '06d48ab40b815a66985f0ae98bbc7c6d',
+    //   indexName: 'rainbow'
+    // },
     footer: {
       message: 'Released under the MIT License.',
       copyright: 'Copyright © 2019-present Evan You'
