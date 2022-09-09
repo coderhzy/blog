@@ -10,7 +10,7 @@
     "vue": "^3.2.38"
   },
   "scripts": {
-    "docs:dev": "vitepress build docs && vitepress dev docs",
+    "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs"
   }

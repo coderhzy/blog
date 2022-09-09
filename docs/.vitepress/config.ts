@@ -56,6 +56,7 @@ function nav() {
         items: [
           { text: 'TypeScript', link: '/src/note/issue/01-ts-issue' },
           { text: 'VueJs', link: '/src/note/issue/02-vue-issue' },
+          { text: 'WebView', link: '/src/note/issue/03-webview-issue' },
         ]
       },
       {
@@ -132,6 +133,7 @@ function nav() {
           { text: '说一下css盒模型', link: '/src/essay/2022/everyDay/02-说一下css盒模型' },
           { text: '如何判断一个数组是数组', link: '/src/essay/2022/everyDay/03-如何判断一个数组是数组' },
           { text: '颜色拾取器windows失焦Bug', link: '/src/essay/2022/everyDay/04-颜色拾取器windows失焦Bug' },
+          { text: 'export具名导出和默认导出区别', link: '/src/essay/2022/everyDay/05-使用export具名导出和默认导出区别' },
         ]
       },
       {
