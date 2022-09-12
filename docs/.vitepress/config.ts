@@ -98,7 +98,17 @@ function sidebarNote() {
           link: '/src/note/electron/01-init-vite-electron'
         }
       ]
-    }
+    },
+    {
+      text: 'Linux',
+      collapsible: true,
+      items: [
+        {
+          text: 'vim命令',
+          link: '/src/note/linux/01_vim指令记录'
+        },
+      ]
+    },
   ]
 }
 
