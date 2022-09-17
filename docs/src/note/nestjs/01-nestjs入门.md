@@ -18,8 +18,9 @@ cd project_name // 进入项目目录
 yarn start:dev  // 启动项目
 ```
 
+```shell
 访问http://localhost:3000，会得到一个hello
-
+```
 2. 项目目录介绍
 
 <img src="https://imgsbed-1301560453.cos.ap-shanghai.myqcloud.com/blog/image-20220916174029931.png" alt="image-20220916174029931" style="zoom:50%;" />
