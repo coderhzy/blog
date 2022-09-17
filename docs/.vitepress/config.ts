@@ -109,6 +109,16 @@ function sidebarNote() {
         },
       ]
     },
+    {
+      text: 'NestJS',
+      collapsible: true,
+      items: [
+        {
+          text: 'NestJS入门',
+          link: '/src/note/nestjs/01-nestjs入门'
+        },
+      ]
+    },
   ]
 }
 
