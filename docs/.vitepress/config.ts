@@ -46,7 +46,7 @@ function nav() {
     },
     {
       text: '算法',
-      link: '/src/algorithm/algorithmQA/01-quickSort',
+      link: '/src/algorithm/algorithmQA/01-快速排序',
       activeMatch: '/algorithm/'
     },
     {
@@ -78,47 +78,69 @@ function sidebarNote() {
       items: [
         { text: 'TypeScript', link: '/src/note/issue/01-ts-issue' },
         { text: 'VueJs', link: '/src/note/issue/02-vue-issue' },
-        { text: 'WebView', link: '/src/note/issue/03-webview-issue' }
+        { text: 'WebView', link: '/src/note/issue/03-webview-issue' },
+        { text: 'React', link: '/src/note/issue/04-react-issue' },
+        { text: 'NodeJs', link: '/src/note/issue/05-node-issue' },
+        { text: 'Webpack', link: '/src/note/issue/06-webpack-issue' },
+        { text: 'Git', link: '/src/note/issue/07-git-issue' },
+        { text: 'CSS', link: '/src/note/issue/08-css-issue' },
+        { text: 'JavaScript', link: '/src/note/issue/09-js-issue' },
+        { text: 'HTTP', link: '/src/note/issue/10-http-issue' },
+        { text: '浏览器', link: '/src/note/issue/11-browser-issue' },
+        { text: '算法', link: '/src/note/issue/12-algorithm-issue' },
+        { text: '其他', link: '/src/note/issue/13-other-issue' }
       ]
     },
     {
-      text: 'TypeScript',
-      collapsible: true,
-      items: [
-        { text: '条件类型', link: '/src/note/typescript/01-ConditionalTypes' },
-        { text: 'test', link: '/src/note/typescript/02-Generics' }
-      ]
-    },
-    {
-      text: 'Electron',
+      text: '技术笔记',
       collapsible: true,
       items: [
         {
-          text: '初始化vite+Electron',
-          link: '/src/note/electron/01-init-vite-electron'
+          text: 'Electron',
+          collapsible: true,
+          items: [
+            {
+              text: '01-Vite初始化electron项目',
+              link: '/src/note/notes/electron/01-init-vite-electron'
+            }
+          ]
+        },
+        {
+          text: 'NestJS',
+          collapsible: true,
+          items: [
+            {
+              text: '01-初识NestJS',
+              link: '/src/note/notes/nestjs/01-初识NestJS'
+            }
+          ]
+        },
+        {
+          text: 'TypeScript',
+          collapsible: true,
+          items: [
+            {
+              text: '01-泛型',
+              link: '/src/note/notes/typescript/01-泛型'
+            },
+            {
+              text: '02-测试',
+              link: '/src/note/notes/typescript/02-测试'
+            }
+          ]
+        },
+        {
+          text: 'Linux',
+          collapsible: true,
+          items: [
+            {
+              text: '01-vim常用命令',
+              link: '/src/note/notes/linux/01-vim常用命令'
+            }
+          ]
         }
       ]
-    },
-    {
-      text: 'Linux',
-      collapsible: true,
-      items: [
-        {
-          text: 'vim命令',
-          link: '/src/note/linux/01_vim指令记录'
-        },
-      ]
-    },
-    {
-      text: 'NestJS',
-      collapsible: true,
-      items: [
-        {
-          text: 'NestJS入门',
-          link: '/src/note/nestjs/01-nestjs入门'
-        },
-      ]
-    },
+    }
   ]
 }
 
@@ -164,7 +186,7 @@ function sidebarAlgorithm() {
       text: '算法',
       collapsible: true,
       items: [
-        { text: '快速排序', link: '/src/algorithm/algorithmQA/01-quickSort' }
+        { text: '快速排序', link: '/src/algorithm/algorithmQA/01-快速排序' }
       ]
     },
     {
