@@ -92,52 +92,56 @@ function sidebarNote() {
       ]
     },
     {
-      text: '技术笔记',
+      text: 'Electron',
       collapsible: true,
       items: [
         {
-          text: 'Electron',
-          collapsible: true,
-          items: [
-            {
-              text: '01-Vite初始化electron项目',
-              link: '/src/note/notes/electron/01-init-vite-electron'
-            }
-          ]
+          text: '01-vite初始化electron',
+          link: 'src/note/notes/electron/01-vite初始化electron'
+        }
+      ]
+    },
+    {
+      text: 'NestJs',
+      collapsible: true,
+      items: [
+        {
+          text: '01-初识NestJS',
+          link: 'src/note/notes/nestjs/01-初识NestJS'
+        }
+      ]
+    },
+    {
+      text: 'TypeScript',
+      collapsible: true,
+      items: [
+        {
+          text: '01-泛型',
+          link: 'src/note/notes/typescript/01-泛型'
         },
         {
-          text: 'NestJS',
-          collapsible: true,
-          items: [
-            {
-              text: '01-初识NestJS',
-              link: '/src/note/notes/nestjs/01-初识NestJS'
-            }
-          ]
-        },
+          text: '02-测试',
+          link: 'src/note/notes/typescript/02-测试'
+        }
+      ]
+    },
+    {
+      text: 'Linux',
+      collapsible: true,
+      items: [
         {
-          text: 'TypeScript',
-          collapsible: true,
-          items: [
-            {
-              text: '01-泛型',
-              link: '/src/note/notes/typescript/01-泛型'
-            },
-            {
-              text: '02-测试',
-              link: '/src/note/notes/typescript/02-测试'
-            }
-          ]
-        },
+          text: '01-vim常用命令',
+          link: 'src/note/notes/linux/01-vim常用命令'
+        }
+      ]
+    },
+    {
+      text: 'ReactJs',
+      collapsible: true,
+      items: [
         {
-          text: 'Linux',
-          collapsible: true,
-          items: [
-            {
-              text: '01-vim常用命令',
-              link: '/src/note/notes/linux/01-vim常用命令'
-            }
-          ]
+          text: 'React基础',
+          link: 'src/note/notes/react/01-react基础'
         }
       ]
     }
