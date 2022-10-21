@@ -24,6 +24,6 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          pages_cname: www.codehzy.cn
           github_token: ${{ secrets.BLOG_TOKEN }}
+          cname: www.codehzy.cn
           publish_dir: docs/.vitepress/dist
