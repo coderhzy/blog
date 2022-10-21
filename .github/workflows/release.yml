@@ -26,3 +26,5 @@ jobs:
         with:
           github_token: ${{ secrets.BLOG_TOKEN }}
           publish_dir: docs/.vitepress/dist
+      - name: Connect to Domin
+        run: echo 'www.codehzy.cn' > CNAME
