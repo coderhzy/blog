@@ -348,7 +348,7 @@ export default class JSXConvert extends Component {
 
 ## 四、组件生命周期函数
 
-- **介绍： [组件生命周期](https://reactjs.org/docs/react-component.html#componentdidmount)**
+### 1. **介绍： [组件生命周期](https://reactjs.org/docs/react-component.html#componentdidmount)**
   - 1. 通常我们在类组件中使用组件生命周期函数来执行代码，从而保证页面数据正产渲染。
   - 2. 类组件-生命周期函数分类：
     - `componentDidMount`: 组件被渲染到DOM: 被挂载到DOM
@@ -358,7 +358,7 @@ export default class JSXConvert extends Component {
     - `getSnapshotBeforeUpdate`: 它使您的组件能够在DOM可能被更改之前从DOM捕获一些信息（例如滚动位置）
   - 3. 等后文，介绍Hooks时候，对函数式组件怎么来声明周期再详细讲解
 
-- **case1-组件生命周期函数**
+### 2. **case1-组件生命周期函数**
 
 ```javascript
 import React from "react";
