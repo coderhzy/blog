@@ -9,6 +9,7 @@ export default {
   base: '/blog/',
   themeConfig: {
     nav: nav(),
+    outline: 'deep',
     sidebar: {
       '/src/note/': sidebarNote(),
       '/src/read/': sidebarRead(),
@@ -92,6 +93,16 @@ function sidebarNote() {
       ]
     },
     {
+      text: 'ReactJs',
+      collapsible: true,
+      items: [
+        {
+          text: 'React基础',
+          link: 'src/note/notes/react/01-react基础'
+        }
+      ]
+    },
+    {
       text: 'Electron',
       collapsible: true,
       items: [
@@ -132,16 +143,6 @@ function sidebarNote() {
         {
           text: '01-vim常用命令',
           link: 'src/note/notes/linux/01-vim常用命令'
-        }
-      ]
-    },
-    {
-      text: 'ReactJs',
-      collapsible: true,
-      items: [
-        {
-          text: 'React基础',
-          link: 'src/note/notes/react/01-react基础'
         }
       ]
     }
