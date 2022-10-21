@@ -930,6 +930,3 @@ export default class NavBar extends React.Component {
 
 ### 2. 作用域插槽
 
-```javascript
-
-```
