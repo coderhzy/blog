@@ -2,6 +2,7 @@
 
 
 - 文中有些案例过长： 请选择性观看。
+- 一文解决React基本使用，如果看不太懂React官网，建议可以看看本文。
 
 
 ## 一、类组件
@@ -716,5 +717,219 @@ export default class TabControl extends React.Component{
 
 #### 3.1 Context
 
+- **介绍： Context**
+  - 1. 使用`createContext`创建对应的Context
+  - 2. 使用创建出的Context的`Provider`作为父组件，其中所有被嵌套的子组件使用对应`Context-Consumer`来**消费**Context中的数据
+  - 3. 主要方式方式为： 回调函数，参数为`value`，value中就能拿到外层嵌套的Context中的数据
 
-### 3.2 EventBus
+**case1-Context**
+
+
+```javascript
+// ./context/theme-Context.js
+import React from "react";
+
+const ThemeContext = React.createContext({color: 'blue', size: 10})
+
+export default ThemeContext
+
+// ./Context.jsx
+import React from "react";
+import Home from "./Home";
+import ThemeContext from "./Context/theme-context";
+import UserContext from "./Context/user-context";
+
+export default  class  Context  extends  React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            info: { name: "kobe", age: 30 }
+        }
+    }
+
+    render(){
+        const { info } = this.state
+        return (
+            <div>
+                <h1>Context</h1>
+
+                {/* 1. 普通传值   */}
+                {/*<Home name={info.name} age={info.age} />*/}
+                {/*<Home {...info} />*/}
+                  <ThemeContext.Provider value={{color: 'red',size:30}}>
+                      <Home {...info} />
+                  </ThemeContext.Provider>
+
+            </div>
+        )
+    }
+}
+
+// ./ThemeContext.jsx
+import ThemeContext from "./Context/theme-context";
+
+export default function HomeBanner() {
+  return (
+    <div>
+      <h2>HomeBanner</h2>
+        <ThemeContext.Consumer>
+            {
+                value => {
+                    return <h2>Banner theme: {value.color}</h2>
+                }
+            }
+        </ThemeContext.Consumer>
+    </div>
+  );
+}
+```
+
+
+#### 3.2 EventBus
+
+- **介绍： 通过EventBus来派发数据**
+  - 1. 使用EventBus的`on`方法来添加事件名
+  - 2. 使用EventBus的`emit`方法将值传递给对应事件名
+
+```javascript 
+// ./utils/event-bus.js
+
+import { HYEventBus } from "hy-event-store"
+
+const eventBus = new HYEventBus()
+
+export default eventBus
+
+
+// ./EventBus.jsx
+
+import React from "react";
+import Home from "./Home";
+import eventBus from './utils/event-bus'
+
+
+export default class EventBus extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        name: "kobe",
+        age: 30,
+        height: 180
+    }
+  }
+
+
+  bannerPrevClick(info) {
+    console.log("app中监听到bannerPrev", info)
+  }
+
+  bannerNextClick(name, age, height) {
+    console.log("app中监听到bannerNext", name, age, height)
+    this.setState({ name, age, height })
+  }
+
+  componentDidMount() {
+    eventBus.on('bannerPrev', this.bannerPrevClick,this)
+    eventBus.on('bannerNext', this.bannerNextClick,this)
+  }
+
+
+
+  render() {
+    const { name,age,height } = this.state
+    return (
+      <div>
+        <h1>EventBus: Component: {name}-{age}-{height}</h1>
+        <Home />
+      </div>
+    );
+  }
+}
+
+// ./HomeBanner.jsx
+
+import React from "react";
+import eventBus from './utils/event-bus'
+
+export default class HomeBanner extends React.Component {
+
+
+    prevClick(){
+        console.log('上一个')
+        eventBus.emit('bannerPrev', {nickname: "kobe", level: 99})
+    }
+
+    nextClick(){
+        console.log('下一个')
+        eventBus.emit('bannerNext', 'james', 35, 190)
+    }
+
+
+    render() {
+        return (
+            <div>
+                <h1>HomeBanner</h1>
+                <button onClick={() => this.prevClick()}>上一个</button>
+                <button onClick={() => this.nextClick()}>下一个</button>
+            </div>
+        );
+    }
+}
+```
+
+## 六、React中插槽实现
+
+### 1. 普通插槽
+- **介绍： react中并没有类似Vue的插槽**
+  - 1. react将要传入的DOM或者组件嵌套在组件标签中
+  - 2. 在被使用组件中`props`中获取`children`，children为数组，对应索引就是刚才传入的DOM或者组件，直接从`children`中取出并渲染。
+
+```javascript
+// ./Slot.jsx
+
+import React from "react";
+import NavBar from "./nav-bar";
+import NavBarTwo from "./nav-bar-two";
+
+export default class Slot extends React.Component {
+    render() {
+        const btn = <button>按钮2</button>;
+        return (
+            <div>
+                <NavBar>
+                    <button>按钮</button>
+                    <h2>哈哈哈</h2>
+                    <i>斜体文本</i>
+                </NavBar>
+
+                <NavBarTwo left={btn} center={<h2>hehehe</h2>} right={<i>微软雅黑</i>} />
+            </div>
+        )
+    }
+}
+
+// ./nav-bar/index.jsx
+import React from "react";
+import styled from './styled.module.css'
+
+export default class NavBar extends React.Component {
+    render(){
+        const { children } = this.props
+        return(
+            <div className={styled.navBar}>
+                <div className={styled.left}>{children[0]}</div>
+                <div className={styled.center}>{children[1]}</div>
+                <div className={styled.right}>{children[2]}</div>
+            </div>
+        )
+    }
+}
+```
+
+### 2. 作用域插槽
+
+```javascript
+
+```
