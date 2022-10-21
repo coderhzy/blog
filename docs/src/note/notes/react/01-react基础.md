@@ -713,3 +713,8 @@ export default class TabControl extends React.Component{
 
 ### 3. 非父子组件通信
 
+
+#### 3.1 Context
+
+
+### 3.2 EventBus
