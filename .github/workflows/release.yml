@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
           node-version: 16
           cache: yarn
       - run: yarn install --frozen-lockfile
