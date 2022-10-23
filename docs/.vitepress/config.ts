@@ -97,8 +97,16 @@ function sidebarNote() {
       collapsible: true,
       items: [
         {
-          text: 'React基础',
-          link: 'src/note/notes/react/01-react基础'
+          text: '01_React基础',
+          link: 'src/note/notes/react/01-React基础'
+        },
+        {
+          text: '02_React全家桶',
+          link: 'src/note/notes/react/02-React全家桶'
+        },
+        {
+          text: '03_Hooks',
+          link: 'src/note/notes/react/03-Hooks'
         }
       ]
     },
@@ -107,7 +115,7 @@ function sidebarNote() {
       collapsible: true,
       items: [
         {
-          text: '01-vite初始化electron',
+          text: '01_vite初始化electron',
           link: 'src/note/notes/electron/01-vite初始化electron'
         }
       ]
@@ -117,7 +125,7 @@ function sidebarNote() {
       collapsible: true,
       items: [
         {
-          text: '01-初识NestJS',
+          text: '01_初识NestJS',
           link: 'src/note/notes/nestjs/01-初识NestJS'
         }
       ]
@@ -127,11 +135,11 @@ function sidebarNote() {
       collapsible: true,
       items: [
         {
-          text: '01-泛型',
+          text: '01_泛型',
           link: 'src/note/notes/typescript/01-泛型'
         },
         {
-          text: '02-测试',
+          text: '02_测试',
           link: 'src/note/notes/typescript/02-测试'
         }
       ]
@@ -141,7 +149,7 @@ function sidebarNote() {
       collapsible: true,
       items: [
         {
-          text: '01-vim常用命令',
+          text: '01_vim常用命令',
           link: 'src/note/notes/linux/01-vim常用命令'
         }
       ]
