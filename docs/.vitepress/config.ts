@@ -98,15 +98,15 @@ function sidebarNote() {
       items: [
         {
           text: '01_React基础',
-          link: 'src/note/notes/react/01-React基础'
+          link: 'src/note/notes/react/01_React基础'
         },
         {
           text: '02_React全家桶',
-          link: 'src/note/notes/react/02-React全家桶'
+          link: 'src/note/notes/react/02_React全家桶'
         },
         {
           text: '03_Hooks',
-          link: 'src/note/notes/react/03-Hooks'
+          link: 'src/note/notes/react/03_Hooks'
         }
       ]
     },
