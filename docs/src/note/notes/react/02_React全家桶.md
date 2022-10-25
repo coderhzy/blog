@@ -520,3 +520,277 @@ export default connect(mapStateToProps, mapDispatchToProps)(XXXAbout);
 
 
 ## 四、[React-Router](https://reactrouter.com/en/main)
+
+
+### 1. 介绍：React-Router
+  1. 客户端路由允许您的应用程序通过单击链接来更新URL，而无需从服务器再次请求另一个文档。相反，您的应用程序可以立即呈现一些新的用户界面，并使用fetch发出数据请求，以使用新信息更新页面。
+  2. Router主要作为多个页面之间的之间**导航作用。**
+
+### 2. **case1-React-Router导航**
+
+`./router/index.js`: 单独维护路由表
+```javascript
+// ./router/index.js`
+
+import Home from '../pages/Home'
+import HomeRecommend from "../pages/HomeRecommend"
+import HomeRanking from "../pages/HomeRanking"
+import HomeSongMenu from '../pages/HomeSongMenu'
+// import About from "../pages/About"
+// import Login from "../pages/Login"
+import Category from "../pages/Category"
+import Order from "../pages/Order"
+import NotFound from '../pages/NotFound'
+import Detail from '../pages/Detail'
+import User from '../pages/User'
+import { Navigate } from 'react-router-dom'
+import React from 'react'
+
+const About = React.lazy(() => import("../pages/About"))
+const Login = React.lazy(() => import("../pages/Login"))
+
+const routes = [
+  {
+    path: "/",
+    element: <Navigate to="/home"/>
+  },
+  {
+    path: "/home",
+    element: <Home/>,
+    children: [
+      {
+        path: "/home",
+        element: <Navigate to="/home/recommend"/>
+      },
+      {
+        path: "/home/recommend",
+        element: <HomeRecommend/>
+      },
+      {
+        path: "/home/ranking",
+        element: <HomeRanking/>
+      },
+      {
+        path: "/home/songmenu",
+        element: <HomeSongMenu/>
+      }
+    ]
+  },
+  {
+    path: "/about",
+    element: <About/>
+  },
+  {
+    path: "/login",
+    element: <Login/>
+  },
+  {
+    path: "/category",
+    element: <Category/>
+  },
+  {
+    path: "/order",
+    element: <Order/>
+  },
+  {
+    path: "/detail/:id",
+    element: <Detail/>
+  },
+  {
+    path: "/user",
+    element: <User/>
+  },
+  {
+    path: "*",
+    element: <NotFound/>
+  }
+]
+
+
+export default routes
+```
+
+`App.jsx`: 使用路由表
+
+```javascript
+import React from 'react'
+import { Link, Navigate, Route, Routes, useNavigate, useRoutes } from 'react-router-dom'
+import routes from './router'
+import "./style.css"
+
+export function App(props) {
+  const navigate = useNavigate()
+  
+  function navigateTo(path) {
+    navigate(path)
+  }
+
+  return (
+    <div className='app'>
+      <div className='header'>
+        <span>header</span>
+        <div className='nav'>
+          <Link to="/home">首页</Link>
+          <Link to="/about">关于</Link>
+          <Link to="/login">登录</Link>
+          <button onClick={e => navigateTo("/category")}>分类</button>
+          <span onClick={e => navigateTo("/order")}>订单</span>
+
+          <Link to="/user?name=why&age=18">用户</Link>
+        </div>
+        <hr />
+      </div>
+      <div className='content'>
+        {useRoutes(routes)}
+      </div>
+      <div className='footer'>
+        <hr />
+        Footer
+      </div>
+    </div>
+  )
+}
+
+export default App
+```
+
+- `./hoc/with-router/js`: 定义路由高阶函数,增强并获取一些参数
+```javascript
+import { useState } from "react"
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom"
+
+// 高阶组件: 函数
+function withRouter(WrapperComponent) {
+  return function(props) {
+    // 1.导航
+    const navigate = useNavigate()
+
+    // 2.动态路由的参数: /detail/:id
+    const params = useParams()
+
+    // 3.查询字符串的参数: /user?name=why&age=18
+    const location = useLocation()
+    const [searchParams] = useSearchParams()
+    const query = Object.fromEntries(searchParams)
+
+    const router = { navigate, params, location, query }
+
+    return <WrapperComponent {...props} router={router}/>
+  }
+}
+
+export default withRouter
+```
+
+- `./pages/About.jsx`： 定义组件About
+```javascript
+// ./pages/About.jsx
+
+import React, { PureComponent } from 'react'
+
+export class About extends PureComponent {
+  render() {
+    return (
+      <div>
+        <h1>About Page</h1>
+      </div>
+    )
+  }
+}
+
+export default About
+```
+
+- `./pages/Login.jsx`： 定义组件
+```javascript
+// ./pages/Login.jsx
+
+import React, { PureComponent } from 'react'
+import { Navigate } from 'react-router-dom'
+
+export class Login extends PureComponent {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isLogin: false
+    }
+  }
+  
+  login() {
+    this.setState({ isLogin: true })
+  }
+
+  render() {
+    const { isLogin } = this.state
+
+    return (
+      <div>
+        <h1>Login Page</h1>
+        {!isLogin ? <button onClick={e => this.login()}>登录</button>: <Navigate to="/home"/>}
+      </div>
+    )
+  }
+}
+
+export default Login
+```
+
+- `./pages/Home.jsx`： 定义组件Home
+```javascript
+// ./pages/Home.jsx
+
+import React, { PureComponent } from 'react'
+import { Link, Outlet } from 'react-router-dom'
+import { withRouter } from "../hoc"
+
+export class Home extends PureComponent {
+  navigateTo(path) {
+    const { navigate } = this.props.router
+    navigate(path)
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Home Page</h1>
+        <div className='home-nav'>
+          <Link to="/home/recommend">推荐</Link>
+          <Link to="/home/ranking">排行榜</Link>
+          <button onClick={e => this.navigateTo("/home/songmenu")}>歌单</button>
+        </div>
+
+        {/* 占位的组件 */}
+        <Outlet/>
+      </div>
+    )
+  }
+}
+
+export default withRouter(Home)
+```
+
+
+- `./pages/Detail.jsx`： 定义组件Detail
+```javascript
+// ./pages/Detail.jsx
+
+import React, { PureComponent } from 'react'
+import { withRouter } from '../hoc'
+
+export class Detail extends PureComponent {
+  render() {
+    const { router } = this.props
+    const { params } = router
+
+    return (
+      <div>
+        <h1>Detail Page</h1>
+        <h2>id: {params.id}</h2>
+      </div>
+    )
+  }
+}
+
+export default withRouter(Detail)
+```
