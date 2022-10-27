@@ -161,3 +161,71 @@ const ControlExecCallback = memo(() => {
 export default ControlExecCallback;
 
 ```
+## 3. useContext
+
+
+### 1. 介绍useContext
+- 1. 使用useContext可以更快捷得获取上下文对象。
+- 2. 当前上下文值由组件树树中调用组件上方，最近的`<MyContext.Provider>`的值prop确定。
+- 3. 当组件上方最近的`<MyContext.Provider>`更新时，此Hook将触发重新渲染，并将最新的上下文值传递给该MyContext提供程序。
+- 4. 即使祖先使用`React.memo`或应该`ComponentUpdate`，**重新渲染仍将从使用useContext的组件本身开始**。
+
+
+### 2. 使用useContext
+  
+- `./context/index.js`
+```javascript
+// ./context/index.js
+
+const themes = {
+  light: {
+    foreground: "#000000",
+    background: "#eeeeee"
+  },
+  dark: {
+    foreground: "#ffffff",
+    background: "#222222"
+  }
+};
+
+const ThemeContext = React.createContext(themes.light);
+
+export { ThemeContext }
+```
+
+- `./App.js`: 主入口,当然也可以是某个组件的组件树上的某个父组件
+```javascript
+// ./context/App.js
+import { ThemeContext } from "./context";
+
+function App() {
+  return (
+    <ThemeContext.Provider value={themes.dark}>
+      <UseContextComponent />
+    </ThemeContext.Provider>
+  );
+}
+```
+
+- `./pages/UseContextComponent.jsx`: 使用useContext的组件
+```javascript
+import React, { memo, useContext } from "react";
+import { ThemeContext } from "./context";
+
+const UseContextComponent = memo(() => {
+  const theme = useContext(ThemeContext);
+  return (
+    <div>
+      UseContextComponent
+      <h2 style={{ background: theme.background, color: theme.foreground }}>Theme</h2>
+    </div>
+  );
+});
+
+export default UseContextComponent;
+```
+
+## 4. useReducer
+
+
+## 1. 介绍useReducer
