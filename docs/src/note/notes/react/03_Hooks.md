@@ -228,4 +228,569 @@ export default UseContextComponent;
 ## 4. useReducer
 
 
-## 1. 介绍useReducer
+### 1. 介绍useReducer
+- 作为useState的代替方案。
+- 使用场景为，某个组件需要定义多个State状态时，使用`useReducer`来将多个State传入到第二个参数中。并定义一个类似`redux`的reducer来控制State的状态。
+- 使用场景很少，并且不推荐在组件中这么使用，因为会导致某个组件过于臃肿，此场景建议将数据放到redux中使用。
+
+
+### 2. 使用useReducer 
+```javascript
+// .UseReducerHook.jsx
+import React, { memo } from "react";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { ...state, counter: state.counter + 1 };
+    case "decrement":
+      return { ...state, counter: state.counter - 1 };
+    case "add_number":
+      return { ...state, counter: state.counter + action.payload };
+    case "sub_number":
+      return { ...state, counter: state.counter - action.payload };
+    default:
+      return state;
+  }
+}
+
+const UseReducerHook = memo(() => {
+  const [state, dispatch] = React.useReducer(reducer, {
+    counter: 0,
+    friends: [],
+    user: {},
+  });
+
+  return (
+    <>
+      <h2>当前计数: {state.counter}</h2>
+      <button onClick={() => dispatch({ type: "increment" })}>+1</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>-1</button>
+      <button onClick={() => dispatch({ type: "add_number", payload: 5 })}>
+        +5
+      </button>
+      <button onClick={() => dispatch({ type: "sub_number", payload: 5 })}>
+        -5
+      </button>
+    </>
+  );
+});
+
+export default UseReducerHook;
+```
+
+## 5. useCallback
+
+- 网络上很多文章对useCallback理解都是有误的。
+- useCallback，本质不能解决函数重复定义的问题。他只能解决函数传递给子组件时，子组件不必要的重新渲染问题。
+- 两种方法
+  - 方法一： 使用相等性Ref配合useCallback来避免重复渲染
+  - 方法二： 使用useCallback来避免重复渲染
+
+
+### 1. 使用useCallback-避免子组件重复渲染
+```javascript
+// .UseCallbackComponent.jsx
+import React, { memo, useCallback, useState, useRef } from "react";
+
+const MYHome = memo((props) => {
+  const { increment } = props;
+  console.log("Home重新渲染");
+  return (
+    <div>
+      <button onClick={increment}>increment</button>
+    </div>
+  );
+});
+
+const UseCallbackComponent = memo(() => {
+  const [count, setCount] = useState(0);
+  const [message, setMessage] = useState("hello");
+  // 从上方的代码可以看出，increment函数每次都会重新创建，这样会导致子组件重新渲染。
+  // 注意： useCallback并不能解决函数重复定义的问题。他只能解决函数传递给子组件时，子组件不必要的重新渲染问题。
+
+  // 方法一： 使用相等性Ref配合useCallback来避免重复渲染
+  // const countRef = useRef();
+
+  // countRef.current = count;
+
+  // const increment = useCallback(() => {
+  //   console.log("increment重新渲染");
+  //   setCount(countRef.current + 1);
+  // }, []);
+
+  // 方法二： 使用useCallback来避免重复渲染
+  // const increment = useCallback(() => {
+  //   console.log("increment重新渲染");
+  //   setCount(count + 1);
+  // }, [count]);
+
+  const increment = () => {
+    console.log("increment重新渲染");
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <h2>计数器：{count} </h2>
+      <button onClick={increment}>+ 1</button>
+
+      <MYHome increment={increment} />
+
+      <h2>message: {message}</h2>
+      <button onClick={(e) => setMessage(Math.random())}>修改message</button>
+    </div>
+  );
+});
+
+export default UseCallbackComponent;
+```
+
+## 6. useMemo
+- 对返回值进行缓存。
+- 对比：useCallback对传入到组件的函数进行缓存。useMemo对值缓存。
+
+
+### 1. useMemo使用
+
+```javascript
+// .UseMemoComponent.jsx
+import React, { memo, useState, useMemo } from "react";
+
+const HelloWorld = memo((props) => {
+  console.log("hello world被渲染");
+  return <h2>Hello World</h2>;
+});
+
+function calcNumTotal(num) {
+  let total = 0;
+  for (let i = 1; i <= num; i++) {
+    total += i;
+  }
+  return total;
+}
+
+const UseMemoComponent = memo(() => {
+  const [count, setCount] = useState(0);
+
+  // 不依赖任何只，进行计算，只会在第一次渲染时执行
+  //   const result = useMemo(() => {
+  //     return calcNumTotal(count);
+  //   }, []);
+
+  // 依赖count，只有count发生变化时，才会执行
+  const result = useMemo(() => {
+    return calcNumTotal(count);
+  }, [count]);
+
+  // info会因为每次渲染都会重新创建，所以会导致子组件重新渲染
+  // 使用useMemo
+  const info = useMemo(() => {
+    return { name: "hzy", age: 18 };
+  }, []);
+
+  return (
+    <div>
+      <h2>计算结果： {result}</h2>
+      <h2>计数器：{count} </h2>
+      <button onClick={(e) => setCount(count + 1)}>+1</button>
+      <HelloWorld result={result} info={info} />
+    </div>
+  );
+});
+
+export default UseMemoComponent;
+```
+
+## 7. useRef
+
+- 介绍： useRef
+  - useRef能更方便的获取绑定ref的dom
+
+### 1. 基础使用useRef
+```javascript
+// ./UseRefComponent.jsx
+import React, { memo, useRef } from "react";
+
+const UseRefComponent = memo(() => {
+  const titleRef = useRef();
+  const inputRef = useRef();
+
+  function showTitleDom() {
+    console.log(titleRef.current);
+    inputRef.current.focus();
+  }
+  return (
+    <div>
+      UseRefComponent
+      <h2 ref={titleRef}>hello world</h2>
+      <input type="text" ref={inputRef} />
+      <button onClick={showTitleDom}>查看title的Dom</button>
+    </div>
+  );
+});
+
+export default UseRefComponent;
+```
+
+### 2. 使用useRef绑定值
+
+```javascript
+import React, { memo, useCallback } from "react";
+
+let obj = null;
+const UseRefComponentBindValue = memo(() => {
+  const [count, setCount] = React.useState(0);
+  const nameRef = React.useRef();
+  console.log(obj === nameRef); // true
+  obj = nameRef;
+
+  const countRef = React.useRef();
+  countRef.current = count;
+
+  const increment = useCallback(() => {
+    setCount(countRef.current + 1);
+  }, []);
+
+  return (
+    <div>
+      UseRefComponentBindValue
+      <h2>Hello world: {count}</h2>
+      <button onClick={(e) => setCount(count + 1)}>+1</button>
+      <button onClick={increment}>+1</button>
+    </div>
+  );
+});
+
+export default UseRefComponentBindValue;
+```
+
+## 8. useImperativeHandle
+
+- 介绍：useImperativeHandle
+  - 1. 限制父组件对子组件操控能力
+  - 2. 在子组件中，使用`forwardRef`包裹，并用`useImperativeHandle`来**限制子组件对父组件传入的ref的操作**
+
+```javascript
+import React, { forwardRef, memo, useImperativeHandle, useRef } from "react";
+
+const HelloWorld = memo(
+  forwardRef((props, ref) => {
+    const inputRef = useRef();
+    // 限制子组件对父组件传入的ref的操作
+    useImperativeHandle(ref, () => {
+      return {
+        focus() {
+          console.log("focus");
+          inputRef.current.focus();
+        },
+        setValue(value) {
+          inputRef.current.value = value;
+        },
+      };
+    });
+
+    return <input type="text" ref={inputRef} />;
+  })
+);
+
+const UseImperativeHandleComponent = memo(() => {
+  const titleRef = useRef();
+  const inputRef = useRef();
+
+  const handleDom = () => {
+    inputRef.current.focus();
+    inputRef.current.setValue("hello");
+  };
+
+  return (
+    <div>
+      UseImperativeHandleComponent
+      <h2 ref={titleRef}>哈哈哈</h2>
+      <HelloWorld ref={inputRef} />
+      <button onClick={handleDom}>Dom操作</button>
+    </div>
+  );
+});
+
+export default UseImperativeHandleComponent;
+```
+
+## 9. useLayoutEffect
+
+- 介绍： useLayoutEffect
+  - `useLayoutEffect`会在渲染内容更新到DOM之前执行，**会阻塞DOM更新**
+
+```javascript
+// 场景： 解决数字变更闪烁
+// ./UseLayOutEffectSolveCounterBoliBoli.jsx
+import React, { memo, useLayoutEffect, useState } from "react";
+
+const UseLayOutEffectSolveCounterBoliBoli = memo(() => {
+  const [count, setCount] = useState(0);
+
+  useLayoutEffect(() => {
+    console.log("useLayoutEffect");
+    if (count === 0) {
+      setCount(Math.random() + 100);
+    }
+  }, [count]);
+  return (
+    <div>
+      UseLayOutEffectSolveCounterBoliBoli
+      <h2>counter: {count}</h2>
+      <button onClick={(e) => setCount(0)}>设置为0</button>
+    </div>
+  );
+});
+
+export default UseLayOutEffectSolveCounterBoliBoli;
+
+```
+
+## 10. 自定义Hooks
+
+- 介绍：自定义hooks
+  - 这个没啥好说的，就是自定义一个有返回值的函数。用的时候，执行这个函数拿到对应返回值就可以来。
+  - 对应逻辑都在自定义hook中实现。
+
+
+### 1. 自定义hooks
+
+- `useScrollPosition`: 自定义获取鼠标位置参数hook
+```javascript
+// ./hooks/useScrollPosition.js
+import { useEffect, useState } from "react";
+const useScrollPosition = () => {
+  const [scrollX, setScrollX] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollX(window.scrollX);
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return [scrollX, scrollY];
+};
+
+export default useScrollPosition;
+```
+
+### 2. 使用自定义hook 
+- `UseGetWindowScrollComponent`: 使用自定义hook --- `useScrollPosition`
+```javascript
+import React, { memo } from "react";
+import { useScrollPosition } from "./hooks";
+
+const UseGetWindowScrollComponent = memo(() => {
+  const [scrollX, scrollY] = useScrollPosition();
+  return (
+    <div style={{ height: "2000px", width: "2000px" }}>
+      UseGetWindowScrollComponent
+      <div style={{ position: "fixed" }}>
+        {" "}
+        {scrollX} - {scrollY}
+      </div>
+    </div>
+  );
+});
+
+export default UseGetWindowScrollComponent;
+```
+
+## 11. redux中使用hook
+- 介绍redux中用的hook
+  - useSelector： 获取redux定义的state
+  - useDispatch： 获取redux中定义的action
+
+### 1. 定义redux
+
+- `counter.js`: 定义store必要组成
+```javascript
+// ./store/modules/counter.js
+
+import { createSlice } from "@reduxjs/toolkit"
+
+const counterSlice = createSlice({
+  name: "counter",
+  initialState: {
+    count: 99,
+    message: "Hello World"
+  },
+  reducers: {
+    addNumberAction(state, { payload }) {
+      state.count = state.count + payload
+    },
+    subNumberAction(state, { payload }) {
+      state.count = state.count - payload
+    },
+
+    changeMessageAction(state, { payload }) {
+      console.log(payload)
+      state.message = payload
+    }
+  }
+})
+
+export const { addNumberAction, subNumberAction, changeMessageAction } = counterSlice.actions
+export default counterSlice.reducer
+
+```
+
+- `index.js`: 导出store
+```javascript
+// ./store/index.js
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "./modules/counter";
+
+const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+});
+
+export default store;
+```
+
+### 2. 使用useSelector和useDispatch
+
+- **UseHookInRedux**: 在Redux中使用useSelector和useDispatch
+```javascript
+// ./UseHookInRedux.jsx
+import React, { memo } from "react";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
+import { addNumberAction } from "./store/modules/counter";
+
+const UseHookInRedux = memo(() => {
+  const { count } = useSelector((state) => {
+    return {
+      count: state.counter.count,
+    };
+  }, shallowEqual);
+
+  const dispatch = useDispatch();
+
+  const addNumberHandle = (num, isAdd = true) => {
+    if (isAdd) {
+      dispatch(addNumberAction(num));
+    } else {
+      dispatch(addNumberAction(num));
+    }
+  };
+
+  return (
+    <div>
+      UseHookInRedux
+      <h2>当前计数： {count}</h2>
+      <button onClick={(e) => addNumberHandle(1)}>+1</button>
+    </div>
+  );
+});
+
+export default UseHookInRedux;
+```
+
+## 12. useId
+
+- 介绍： useId
+  - 为服务端渲染`NxtJs`提供，生成唯一id
+  - 可以了解下hydration
+
+```javascript
+import React, { memo, useId } from "react";
+
+const UseIdComponent = memo(() => {
+  const [count, setCount] = React.useState(0);
+
+  // 使用场景了解服务端渲染 hydration
+  const id = useId();
+  console.log(id);
+  return <div>UseIdComponent</div>;
+});
+
+export default UseIdComponent;
+```
+
+
+## 13. useTransition
+- 介绍： useTransition
+  - 返回转换的pending状态，以及启动它的函数
+
+```javascript
+// ./UseTransitionComponent.jsx
+import { memo, useState, useTransition } from "react";
+import namesArray from "./namesArray";
+const UseTransitionComponent = memo(() => {
+  const [showNames, setShowNames] = useState(namesArray);
+  const [pending, startTransition] = useTransition();
+
+  const valueChangeHandler = (e) => {
+    startTransition(() => {
+      const keyWord = e.target.value;
+      const filterShowNames = namesArray.filter((item) =>
+        item.includes(keyWord)
+      );
+      setShowNames(filterShowNames);
+    });
+  };
+
+  return (
+    <div>
+      <input type="text" onInput={valueChangeHandler} />
+      <h2>用户名列表： {pending && <span>data loading</span>}</h2>
+      <ul>
+        {showNames.map((item, index) => {
+          return <li key={index}>{item}</li>;
+        })}
+      </ul>
+    </div>
+  );
+});
+
+export default UseTransitionComponent;
+```
+
+## 14. useDeferredValue
+- 介绍： 在用户交互紧急处理以后立即呈现新值
+  - 如果当前呈现是紧急更新（如用户输入）的结果，React将返回之前的值，然后在紧急呈现完成后呈现新值。
+  - 一旦其他工作完成，React就会立即处理更新（而不是等待任意时间），并且像开始过渡一样，延迟值可以挂起，而不会触发现有内容的意外回退。
+
+- UseDeferredValueComponent: 进行筛选，使用useDeferredValue，在用户交互后输入结束后立马进行呈现新值。
+```javascript
+// ./UseDeferredValueComponent.jsx
+import { memo, useState, useDeferredValue } from "react";
+import namesArray from "./namesArray";
+
+const UseDeferredValueComponent = memo(() => {
+  const [showNames, setShowNames] = useState(namesArray);
+  const deferedShowNames = useDeferredValue(showNames);
+
+  const valueChangeHandler = (e) => {
+    const keyWord = e.target.value;
+    const filterShowNames = namesArray.filter((item) => item.includes(keyWord));
+    setShowNames(filterShowNames);
+  };
+
+  return (
+    <div>
+      <input type="text" onInput={valueChangeHandler} />
+      <h2>用户名列表：</h2>
+      <ul>
+        {deferedShowNames.map((item, index) => {
+          return <li key={index}>{item}</li>;
+        })}
+      </ul>
+    </div>
+  );
+});
+
+export default UseDeferredValueComponent;
+```
