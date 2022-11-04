@@ -102,3 +102,12 @@ flush privileges; # 刷新一下
 ```
 
 此时使用Navicate使用root连接则成功;
+
+
+# END-关于我
+
+[本文源码](https://github.com/codehzy/react18-base)
+
+[掘金地址](https://juejin.cn/user/1714893872178823)
+[个人博客](https://www.codehzy.cn/)
+[GitHub](https://github.com/codehzy)
