@@ -121,3 +121,26 @@ textarea {
   -webkit-user-select:auto; /*webkit浏览器*/
 }
 ```
+
+## 七、vue中设置proxy代理
+
+- 解决本地开发后端项目，前端需要解决请求跨域问题。
+  - 下方代码： 会将前端所有对`collect`请求都代理到`http://101.34.88.158:3333/`上，从而解决跨域问题。
+  - 如果请求本地的后端项目，则看下方注释的那一行，填写正常的端口号即可。
+
+`vue.config.js`
+```js
+
+module.exports = defineConfig({
+    devServer: {
+    proxy: {
+      '/collect': {
+        target: 'http://101.34.88.158:3333/',
+        // target: 'http://localhost:3333/',
+        ws: true, //代理websockets
+        changeOrigin: true, // 是否跨域，虚拟的站点需要更管origin
+      },
+    },
+  },
+})
+```
