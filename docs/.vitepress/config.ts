@@ -89,7 +89,8 @@ function sidebarNote() {
         { text: 'HTTP', link: '/src/note/issue/10-http-issue' },
         { text: '浏览器', link: '/src/note/issue/11-browser-issue' },
         { text: '算法', link: '/src/note/issue/12-algorithm-issue' },
-        { text: '其他', link: '/src/note/issue/13-other-issue' }
+        { text: '其他', link: '/src/note/issue/13-other-issue' },
+        { text: 'MySQL', link: '/src/note/issue/14-mysql-issue' }
       ]
     },
     {
@@ -151,6 +152,24 @@ function sidebarNote() {
         {
           text: '01_vim常用命令',
           link: 'src/note/notes/linux/01-vim常用命令'
+        }
+      ]
+    },
+    {
+      text: 'Deploy',
+      collapsible: true,
+      items: [
+        {
+          text: '01_安装MySQL',
+          link: 'src/note/notes/deploy/01-mysql'
+        },
+        {
+          text: '02_pm2部署',
+          link: 'src/note/notes/deploy/02-pm2'
+        },
+        {
+          text: '03_nginx部署',
+          link: 'src/note/notes/deploy/03-nginx'
         }
       ]
     }
