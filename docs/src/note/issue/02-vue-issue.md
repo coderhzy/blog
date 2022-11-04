@@ -85,6 +85,39 @@ const onReset = () => {
 
 问题：在h5上禁止用户拖拽某张图片使其有缩略图
 
+- 解决办法
+
 ```js
 <img class="mtitimg" src="images/m1titimg3.png" draggable="false">
+```
+
+## 六: vue移动端禁止IOS的图片按住默认事件
+
+问题：在一个移动端H5页面上，IOS手机可以按住显示拷贝一系列选项菜单
+
+- 解决办法
+```css
+/* common.css */
+*{
+  -webkit-touch-callout:none; /*系统默认菜单被禁用*/
+  -webkit-user-select:none; /*webkit浏览器*/
+  -khtml-user-select:none; /*早期浏览器*/
+  -moz-user-select:none;/*火狐*/
+  -ms-user-select:none; /*IE10*/
+  user-select:none;
+}
+```
+
+增加上述设置后可以显示IOS的长按出现菜单选项问题。不过会出现输入框没办法输入的问题。还需要增加以下代码才能让你的代码正常工作。
+
+```css
+input {
+  -webkit-user-select:auto; /*webkit浏览器*/
+}
+
+/* 如果存在textarea也输入不进文本的情况下，加上这个 */
+
+textarea {                                                               
+  -webkit-user-select:auto; /*webkit浏览器*/
+}
 ```
