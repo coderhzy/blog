@@ -172,6 +172,16 @@ function sidebarNote() {
           link: 'src/note/notes/deploy/03-nginx'
         }
       ]
+    },
+    {
+      text: 'Rust',
+      collapsible: true,
+      items: [
+        {
+          text: '01_Rust基础',
+          link: 'src/note/notes/rust/01-Rust基本语法'
+        }
+      ]
     }
   ]
 }
@@ -241,28 +251,20 @@ function sidebarEssay() {
       collapsible: true,
       items: [
         {
-          text: '箭头函数和普通函数区别',
-          link: '/src/essay/2022/everyDay/01-箭头函数和普通函数有什么区别'
+          text: 'JavaScript',
+          link: '/src/essay/2022/everyDay/01-JavaScript'
         },
         {
-          text: '说一下css盒模型',
-          link: '/src/essay/2022/everyDay/02-说一下css盒模型'
+          text: 'CSS',
+          link: '/src/essay/2022/everyDay/02-CSS'
         },
         {
-          text: '如何判断一个数组是数组',
-          link: '/src/essay/2022/everyDay/03-如何判断一个数组是数组'
+          text: 'Vue',
+          link: '/src/essay/2022/everyDay/03-Vue'
         },
         {
-          text: '颜色拾取器windows失焦Bug',
-          link: '/src/essay/2022/everyDay/04-颜色拾取器windows失焦Bug'
-        },
-        {
-          text: 'export具名导出和默认导出区别',
-          link: '/src/essay/2022/everyDay/05-使用export具名导出和默认导出区别'
-        },
-        {
-          text: 'css的display双值',
-          link: '/src/essay/2022/everyDay/06_css的display双值'
+          text: 'React',
+          link: '/src/essay/2022/everyDay/04-React'
         }
       ]
     },
