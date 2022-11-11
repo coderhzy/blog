@@ -182,6 +182,16 @@ function sidebarNote() {
           link: 'src/note/notes/rust/01-Rust基本语法'
         }
       ]
+    },
+    {
+      text: 'MonoRepo',
+      collapsible: true,
+      items: [
+        {
+          text: '01_快速上手monorepo',
+          link: 'src/note/notes/monorepo/01-快速上手monorepo'
+        }
+      ]
     }
   ]
 }
