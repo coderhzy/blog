@@ -291,7 +291,7 @@ function sidebarEssay() {
     {
       text: '生活',
       collapsible: true,
-      items: [{ text: '随风而去', link: '/src/essay/2022/life/01-随风而去' }]
+      items: [{ text: '搬家贾西', link: '/src/essay/2022/life/01-搬家贾西' }]
     }
   ]
 }
