@@ -12,7 +12,6 @@ brew install pnpm  # mac
 # OR
 npm install -g pnpm # windows
 ```
-![](https://imgsbed-1301560453.cos.ap-shanghai.myqcloud.com/blog/20221111113215.png)
 
 ### 1. 创建项目文件夹
 
@@ -22,7 +21,6 @@ cd monorepo # 进入文件夹
 pnpm init # 初始化pnpm
 ```
 
-![](https://imgsbed-1301560453.cos.ap-shanghai.myqcloud.com/blog/20221111112929.png)
 
 ### 2. 创建pnpm的yaml文件
 
@@ -45,7 +43,6 @@ packages:
   - "api/**"
 ```
 
-![](https://imgsbed-1301560453.cos.ap-shanghai.myqcloud.com/blog/20221111113931.png)
 
 ### 3. 创建公共api文件夹
 
@@ -53,7 +50,6 @@ packages:
 
 - 文件目录
 
-![](https://imgsbed-1301560453.cos.ap-shanghai.myqcloud.com/blog/20221111114448.png)
 
 - 安装依赖
 ```shell
@@ -64,7 +60,6 @@ pnpm init
 pnpm install axios
 ```
 
-![](https://imgsbed-1301560453.cos.ap-shanghai.myqcloud.com/blog/20221111114220.png)
 
 - 编写代码： 嫌麻烦可以直接复制
 
@@ -125,7 +120,6 @@ npx create vite
 # 使用yarn安装依赖
 ```
 
-![](https://imgsbed-1301560453.cos.ap-shanghai.myqcloud.com/blog/20221111140314.png)
 
 - 4.1 移除项目中App组件内容
 ```vue
@@ -143,7 +137,6 @@ npx create vite
 pnpm install @zy/api
 ```
 
-![](https://imgsbed-1301560453.cos.ap-shanghai.myqcloud.com/blog/20221111141426.png)
 
 - 4.3 使用axios
 
@@ -233,7 +226,6 @@ export default Button;
 pnpm install @zy/component
 ```
 
-![](https://imgsbed-1301560453.cos.ap-shanghai.myqcloud.com/blog/20221111154040.png)
 
 - 使用`components`包
 
