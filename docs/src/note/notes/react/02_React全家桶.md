@@ -408,19 +408,25 @@ export default store;
 ```javascript
 // ./features/counter.js
 
-import { configureStore } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-import counterReducer from "./features/counter";
-import homeReduce from "./features/home";
-
-const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-    home: homeReduce,
+const counterSlice = createSlice({
+  name: "counter",
+  initialState: {
+    counter: 888,
+  },
+  reducers: {
+    addNumber(state, { payload }) {
+      state.counter = state.counter + payload;
+    },
+    subNumber(state, { payload }) {
+      state.counter = state.counter - payload;
+    },
   },
 });
 
-export default store;
+export const { addNumber, subNumber } = counterSlice.actions;
+export default counterSlice.reducer;
 ```
 
 - `home.js`: 定义核心2
