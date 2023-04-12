@@ -6,7 +6,7 @@ export default {
   lastUpdated: true,
   cleanUrls: 'without-subfolders',
   description: '童话说雨后会有一道彩虹, 一个前端开发者的个人博客',
-  base: '/',
+  base: '/blog/',
   themeConfig: {
     nav: nav(),
     outline: 'deep',
