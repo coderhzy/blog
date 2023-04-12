@@ -287,11 +287,6 @@ function sidebarEssay() {
           link: '/src/essay/2022/technology/01-前端程序员自我修养'
         }
       ]
-    },
-    {
-      text: '生活',
-      collapsible: true,
-      items: [{ text: '搬家贾西', link: '/src/essay/2022/life/01-搬家贾西' }]
     }
   ]
 }
